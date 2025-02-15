@@ -1,1 +1,54 @@
-<p>producto works!</p>
+<div class="bg-gray-100 p-6">
+    <!-- Grid de productos -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div
+        class="bg-white p-4 rounded-lg shadow-md relative flex flex-col items-center"
+        *ngFor="let producto of productos"
+      >
+        <!-- Span de Oferta en la Esquina Superior Derecha -->
+        <span
+          *ngIf="producto.isOferta"
+          class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg"
+        >
+          ¡En Oferta!
+        </span>
+  
+        <!-- Mostrar porcentaje de descuento si hay oferta -->
+        <span *ngIf="producto.isOferta" class="absolute top-7 right-0 bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-bl-lg">
+          -{{ producto.porcentaje | percent }}
+        </span>
+
+        <!-- Imagen del producto -->
+        <div class="w-full h-48 flex items-center justify-center">
+          <img
+            class="max-h-full max-w-full object-contain rounded-t-lg"
+            src="{{ producto.imagenUrl }}"
+            alt="{{ producto.nombre }}"
+          />
+        </div>
+
+        <!-- Detalles del producto -->
+        <div class="p-4 text-center">
+          <p class="text-lg font-semibold text-gray-900">{{ producto.nombre | acortarTexto: 60 }}</p>
+  
+          <!-- Precio normal o con descuento -->
+          <p [ngClass]="{ 'text-gray-500 line-through': producto.isOferta, 'text-xl font-bold text-gray-600': !producto.isOferta }">
+            {{ producto.precio | currency: 'S/.' }}
+          </p>
+  
+          <!-- Precio con descuento -->
+          <p *ngIf="producto.isOferta" class="text-xl font-bold text-green-500">
+            {{ producto.preciodescuento | currency: 'S/.' }}
+          </p>
+
+          <!-- Botón de Ver Detalles -->
+          <a [routerLink]="[producto.id]"
+             class="mt-4 w-full bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition duration-300 text-center block">
+            Ver Detalles
+          </a>
+
+        </div>
+  
+      </div>
+    </div>
+  </div>
