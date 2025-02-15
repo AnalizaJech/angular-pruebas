@@ -53,12 +53,16 @@
     >
       <!-- Span de Oferta en la Esquina Superior Derecha -->
       <span
-        *ngIf="producto.isOferta === 'si'"
+        *ngIf="producto.isOferta"
         class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg"
       >
-        ¡Oferta!
+        ¡En Oferta!
       </span>
 
+      <!-- Mostrar porcentaje de descuento si hay oferta -->
+      <span *ngIf="producto.isOferta" class="absolute top-7 right-0 bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-bl-lg">
+        -{{ producto.porcentaje | percent }}
+      </span>
       <!-- Imagen del producto -->
       <div class="w-full h-48 flex items-center justify-center">
         <img
@@ -69,9 +73,19 @@
       </div>
       <!-- Detalles del producto -->
       <div class="p-4 text-center">
-        <p class="text-lg font-semibold">{{ producto.nombre }}</p>
-        <p class="text-gray-500">{{ producto.precio | currency: 'S/.' }}</p>
+        <p class="text-lg font-semibold text-gray-900">{{ producto.nombre | acortarTexto: 60 }}</p>
+
+        <!-- Precio normal o con descuento -->
+        <p [ngClass]="{ 'text-gray-500 line-through': producto.isOferta, 'text-xl font-bold text-gray-600': !producto.isOferta }">
+          {{ producto.precio | currency: 'S/.' }}
+        </p>
+
+        <!-- Precio con descuento -->
+        <p *ngIf="producto.isOferta" class="text-xl font-bold text-green-500">
+          {{ producto.preciodescuento | currency: 'S/.' }}
+        </p>
       </div>
+
     </div>
   </div>
 </div>
