@@ -1,6 +1,30 @@
-<div>
-    <h3>Detalle del producto</h3>
-    <p>producto con id: {{productoId}}</p>
-</div>
-
-
+<div class="flex justify-center items-center min-h-screen bg-gray-100 p-6">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full grid grid-cols-1 sm:grid-cols-2 gap-6">
+      
+      <!-- Imagen del Producto -->
+      <div class="flex justify-center">
+        <img src="{{producto?.imagenUrl}}" alt="{{producto?.nombre}}" class="max-w-full h-auto rounded-lg shadow-md">
+      </div>
+  
+      <!-- Información del Producto -->
+      <div class="flex flex-col justify-center">
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Detalle del Producto</h3>
+        
+        <p class="text-gray-600 text-lg">Producto ID: <span class="font-semibold">{{ productoId }}</span></p>
+        <p class="text-gray-700 text-lg">Nombre: <span class="font-semibold">{{ producto?.nombre }}</span></p>
+        
+        <p class="text-gray-700 text-lg">
+          Precio: 
+          <span class="text-green-600 font-bold text-xl">{{ producto?.precio | currency: 'S/.' }}</span>
+        </p>
+  
+        <!-- Botón para regresar a la lista de productos -->
+        <a routerLink="/producto" 
+           class="mt-4 bg-blue-600 text-white px-6 py-3 rounded-lg text-center font-semibold hover:bg-blue-700 transition duration-300">
+          Volver a Productos
+        </a>
+      </div>
+  
+    </div>
+  </div>
+  
