@@ -3,12 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { Productos } from '../producto.component';
 import { CurrencyPipe } from '@angular/common';
-import { MatButton } from '@angular/material/button';
+
 
 @Component({
   selector: 'prod-detalle',
   //providers: [ProductoService],
-  imports: [CurrencyPipe, MatButton],
+  imports: [CurrencyPipe],
   templateUrl: './prod-detalle.component.html',
 })
 export class ProdDetalleComponent implements OnInit {
