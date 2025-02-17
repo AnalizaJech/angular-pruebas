@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { Productos } from '../producto.component';
 import { CurrencyPipe } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'prod-detalle',
-  providers: [ProductoService],
-  imports: [CurrencyPipe],
+  //providers: [ProductoService],
+  imports: [CurrencyPipe, MatButton],
   templateUrl: './prod-detalle.component.html',
 })
 export class ProdDetalleComponent implements OnInit {
@@ -17,9 +18,14 @@ export class ProdDetalleComponent implements OnInit {
   producto: Productos | undefined;
 
   constructor(
-    private route: ActivatedRoute, 
+    private readonly route: ActivatedRoute, 
+    private readonly Router: Router, 
     private readonly productoService: ProductoService
   ) { 
+  }
+
+  goBack(): void {
+    this.Router.navigate(['/producto']);
   }
 
   ngOnInit(): void {
