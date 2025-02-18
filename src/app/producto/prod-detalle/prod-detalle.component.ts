@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { Productos } from '../producto.component';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgIf } from '@angular/common';
 
 
 @Component({
   selector: 'prod-detalle',
   //providers: [ProductoService],
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, NgIf],
   templateUrl: './prod-detalle.component.html',
 })
 export class ProdDetalleComponent implements OnInit {

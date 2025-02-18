@@ -9,6 +9,7 @@ export class ProductoService {
     {
       id: 11,
       nombre: 'Asus Rog Zephyrus G16 Core I7 13620h 48gb 2tb Rtx4070 165hz',
+      descripcion: 'Laptop Gamer Asus Rog Zephyrus G16 Core I7 13620h 48gb 2tb Rtx4070 165hz',
       precio: 10532,
       imagenUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_686625-MPE80981898409_112024-F.webp',
       isOferta: true,
@@ -19,6 +20,7 @@ export class ProductoService {
     {
       id: 12,
       nombre: 'Mouse gamer de juego Logitech G Series Lightsync G203 lila',
+      descripcion: 'Mouse gamer de juego Logitech G Series Lightsync G203 lila',
       precio: 110,
       imagenUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_962838-MLU78245982107_082024-F.webp',
       isOferta: false,
@@ -29,6 +31,7 @@ export class ProductoService {
     {
       id: 23,
       nombre: 'Teclado Logitech Pebble Keys 2 K380s Inalambrico Bluetooth Color del teclado Grafito Idioma Español',
+      descripcion: 'Teclado Logitech Pebble Keys 2 K380s Inalambrico Bluetooth Color del teclado Grafito Idioma Español',
       precio: 137,
       imagenUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_771237-MLU75359061527_032024-F.webp',
       isOferta: true,
@@ -39,6 +42,7 @@ export class ProductoService {
     {
       id: 34,
       nombre: 'Audifono Accentum Plus Color Blanco',
+      descripcion: 'Audifono Accentum Plus Color Blanco',
       precio: 1099,
       imagenUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_602442-MLU76327083168_052024-F.webp',
       isOferta: true,
@@ -72,5 +76,9 @@ export class ProductoService {
 
   getProductoById(id:number){
     return this.productos.find((producto) => producto.id === id);
+  }
+  addProduct(product: Productos) {
+    this.productos.push(product);
+    console.log('Products in service:', this.productos);
   }
 }

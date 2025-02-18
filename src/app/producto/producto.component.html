@@ -1,3 +1,6 @@
+<button mat-flat-button (click)="openDialog()">Nuevo</button>
+<div>Total products: {{productos?.length}}</div>
+
 <div class="bg-gray-100 p-6">
     <!-- Grid de productos -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -29,23 +32,25 @@
 
         <!-- Detalles del producto -->
         <div class="p-4 text-center">
-          <p class="text-lg font-semibold text-gray-900">{{ producto.nombre | acortarTexto: 60 }}</p>
-  
+          <p class="text-lg font-semibold text-gray-800">{{ producto.nombre | acortarTexto: 25 }}</p>
+          <p class="text-md text-gray-500">{{ producto.descripcion | acortarTexto: 60 }}</p>
           <!-- Precio normal o con descuento -->
-          <p [ngClass]="{ 'text-gray-500 line-through': producto.isOferta, 'text-xl font-bold text-gray-600': !producto.isOferta }">
+          <p [ngClass]="{ 'text-gray-400 line-through': producto.isOferta, 'text-xl font-bold text-gray-600': !producto.isOferta }">
             {{ producto.precio | currency: 'S/.' }}
           </p>
   
           <!-- Precio con descuento -->
-          <p *ngIf="producto.isOferta" class="text-xl font-bold text-green-500">
+          <p *ngIf="producto.isOferta" class="text-xl font-bold text-cyan-600">
             {{ producto.preciodescuento | currency: 'S/.' }}
           </p>
 
           <!-- Botón de Ver Detalles -->
           <a [routerLink]="[producto.id]"
-             class="mt-4 w-full bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition duration-300 text-center block">
+            class="mt-4 w-full bg-cyan-500 text-white px-4 py-2 rounded-lg text-sm font-bold 
+                    hover:bg-cyan-600 hover:shadow-lg transition-all duration-300 text-center block">
             Ver Detalles
           </a>
+
           
         </div>
   
