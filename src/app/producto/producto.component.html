@@ -112,3 +112,29 @@
   </div>
 </div>
 
+
+
+<div class="px-6 sm:px-10 lg:px-20 py-2">
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse border border-gray-300 shadow-md rounded-lg overflow-hidden mb-20">
+      <!-- Encabezados -->
+      <thead>
+        <tr class="bg-gray-800 text-white text-left">
+          <th class="px-6 py-3 border border-gray-300">Id</th>
+          <th class="px-6 py-3 border border-gray-300">Nombre</th>
+          <th class="px-6 py-3 border border-gray-300">Apellido</th>
+        </tr>
+      </thead>
+
+      <!-- Cuerpo de la tabla -->
+      <tbody>
+        <tr *ngFor="let estudiante of estudiantes; let index = index;" 
+            class="bg-white hover:bg-gray-100 transition-all">
+          <td class="px-6 py-3 border border-gray-300 text-gray-700">{{ estudiante.id }}</td>
+          <td class="px-6 py-3 border border-gray-300 text-gray-700">{{ estudiante.name }}</td>
+          <td class="px-6 py-3 border border-gray-300 text-gray-700">{{ estudiante.lastname }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
