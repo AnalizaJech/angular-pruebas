@@ -5,6 +5,7 @@ import { ProductoService } from '../services/producto.service';
 import { ProdDialogoComponent } from './prod-dialogo/prod-dialogo.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { ApiProductoService, ProductApi } from '../services/api-producto.service';
 
 
 @Pipe({
@@ -41,12 +42,20 @@ export type Productos = {
 export class ProductoComponent implements OnInit{
   productos?: Productos[];
   dialog = inject(MatDialog);
+  productosApi: ProductApi[] = [];
 
-  constructor(private readonly productoService: ProductoService) {
+  constructor(
+    private readonly productoService: ProductoService,
+    private readonly apiProductoService: ApiProductoService
+  ) {
+    
   }
-  ngOnInit() {
-    this.productos = this.productoService.getProductos();   
+  
+  async ngOnInit() {
+    this.productos = this.productoService.getProductos();
+    this.productosApi = await this.apiProductoService.getAllProducts();   
   }
+
   openDialog() {
     const dialogRef = this.dialog.open(ProdDialogoComponent, {
       data: {

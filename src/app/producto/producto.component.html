@@ -70,3 +70,45 @@
     </div>
   </div>
 </div>
+
+
+
+<div class="flex items-center justify-center my-16 px-6">
+  <div class="flex-1 border-t border-gray-300"></div>
+  <span class="mx-4 text-gray-600 font-semibold text-lg">Fake Store API</span>
+  <div class="flex-1 border-t border-gray-300"></div>
+</div>
+
+<div class="py-10 px-6 sm:px-10 lg:px-20">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div *ngFor="let producto of productosApi; let index = index;" 
+         class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center text-center transition-all duration-300 hover:shadow-lg">
+      
+      <!-- Contenedor de imagen -->
+      <div class="w-full h-56 flex items-center justify-center">
+        <img [src]="producto.image" [alt]="producto.title" class="max-h-full max-w-full object-contain rounded-lg">
+      </div>
+
+      <!-- Detalles del producto -->
+      <div class="mt-4 flex flex-col flex-grow">
+        <h4 class="text-lg font-semibold text-gray-800">{{ producto.title }}</h4>
+
+        <!-- Precio -->
+        <div class="mt-2">
+          <p class="text-xl font-bold text-cyan-600">{{ producto.price | currency: 'USD' }}</p>
+        </div>
+
+        <!-- Descripción corta -->
+        <p class="text-gray-600 text-sm mt-2">{{ producto.description | acortarTexto: 60 }}</p>
+      </div>
+
+      <!-- Botón de ver producto -->
+      <a [routerLink]="['/productos', producto.id]" 
+         class="mt-4 w-full bg-cyan-500 text-white px-4 py-2 rounded-lg text-sm font-bold 
+                hover:bg-cyan-600 hover:shadow-lg transition-all duration-300 text-center">
+        Ver Producto
+      </a>
+    </div>
+  </div>
+</div>
+
