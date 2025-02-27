@@ -55,7 +55,7 @@ export class ProductoComponent implements OnInit{
   }
 
   async ngOnInit() {
-    this.productos = this.productoService.getProductos();
+    this.productos = await this.productoService.getProductos();
     this.productosApi = await this.apiProductoService.getAllProducts();   
     this.estudiantes = await this.apiEstudianteService.getAllEstudiantes();
   }
@@ -67,9 +67,9 @@ export class ProductoComponent implements OnInit{
       },
     });
   
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(async(result) => {
       if (result) {
-        this.productos = this.productoService.getProductos();
+        this.productos = await this.productoService.getProductos();
         console.log('Products after dialog:', this.productos);
       }
     });

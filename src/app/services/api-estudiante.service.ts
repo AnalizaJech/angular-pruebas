@@ -19,7 +19,7 @@ export class ApiEstudianteService {
     constructor(private readonly http: HttpClient) {}
     getAllEstudiantes() {
       return firstValueFrom(
-        this.http.get<Estudiante[]>(`${this.apiUrl}/v3/39cefe43-a94a-4e37-a5a4-3e4529d22e7f`)
+        this.http.get<Estudiante[]>(`${this.apiUrl}/v3/0ffa9b32-13f2-4fb9-81d6-b090fe278374`)
       );
     }
 }

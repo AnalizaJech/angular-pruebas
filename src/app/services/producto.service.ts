@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Productos } from '../producto/producto.component';
+import { HttpClient } from '@angular/common/http';
+import { ApiProductoService } from './api-producto.service';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
+  productos: Productos[] = [];
+  private readonly apiURL = 'http://localhost:3000';
+
+  /*
   productos: Productos[] = [
     {
       id: 11,
@@ -21,7 +28,7 @@ export class ProductoService {
       imagenUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_686625-MPE80981898409_112024-F.webp',
       isOferta: true,
       porcentaje: 0.30,
-      preciodescuento: 7.372
+      preciodescuento: 7372.4
     },
   
     {
@@ -53,7 +60,7 @@ export class ProductoService {
       imagenUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_771237-MLU75359061527_032024-F.webp',
       isOferta: true,
       porcentaje: 0.2,
-      preciodescuento: 7.372
+      preciodescuento: 109.6
     },
   
     {
@@ -69,14 +76,17 @@ export class ProductoService {
       imagenUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_602442-MLU76327083168_052024-F.webp',
       isOferta: true,
       porcentaje: 0.25,
-      preciodescuento: 7.372
+      preciodescuento: 824.25
     }
-];
+  ];
+  */
 
-  constructor(){
-    this.precioDescuento();
+
+  constructor(private readonly http: HttpClient) { 
+    //this.precioDescuento();
   }
 
+  /*
   precioDescuento(){
     this.productos=this.productos.map((p:Productos)=>{
       
@@ -88,17 +98,27 @@ export class ProductoService {
       p.preciodescuento = p.precio;
       return p;
     
-  })
+    })
+  }
+  */
+
+
+  async getProductos(): Promise<Productos[]> {
+    //this.precioDescuento();
+    //return this.productos;
+    return firstValueFrom(this.http.get<Productos[]>(`${this.apiURL}/productos`));
   }
 
-  getProductos(){
-    this.precioDescuento();
-    return this.productos;
+  async getProductoById(id:number): Promise<Productos | undefined> {
+    try {
+      const productos = await this.getProductos(); // Obtiene todos los productos
+      return productos.find((producto) => producto.id === id); // Filtra por ID
+    } catch (error) {
+      console.error("Error obteniendo el producto:", error);
+      return undefined;
+    }
   }
 
-  getProductoById(id:number){
-    return this.productos.find((producto) => producto.id === id);
-  }
   addProduct(product: Productos) {
     this.productos.push(product);
     console.log('Products in service:', this.productos);

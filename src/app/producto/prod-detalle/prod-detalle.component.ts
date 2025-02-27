@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { Productos } from '../producto.component';
 import { CurrencyPipe, NgIf } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -28,13 +29,11 @@ export class ProdDetalleComponent implements OnInit {
     this.Router.navigate(['/producto']);
   }
 
-  ngOnInit(): void {
-
-    this.route.params.subscribe((params)=>{
-      
-      this.productoId = +params['id'];
-      this.producto = this.productoService.getProductoById(this.productoId);
-      console.log(this.producto);
-    });
+  async ngOnInit(): Promise<void> {
+    const params = await firstValueFrom(this.route.params); // Espera los parámetros de la URL
+    this.productoId = +params['id']; // Convierte el ID a número
+    this.producto = await this.productoService.getProductoById(this.productoId); // Busca el producto en la API
+    console.log(this.producto);
   }
+  
 }
